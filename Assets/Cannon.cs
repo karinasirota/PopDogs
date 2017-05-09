@@ -14,6 +14,8 @@ public class Cannon : MonoBehaviour
     public GameObject[] bubbles;
     public GameObject[] clusterBubbles;
 
+	public GameObject nextBubble;
+
     public GridFill gf;
 
     // Use this for initialization
@@ -23,40 +25,43 @@ public class Cannon : MonoBehaviour
         bubbles[0] = redprefab;
         bubbles[1] = blueprefab;
         bubbles[2] = yellowprefab;
+		//instantiate a bubble in the correct location
+		SpawnBubble ();
     }
 
-   
+
     // Update is called once per frame
     void Update()
     {
         //fire bubble when a is pressed
         if (Input.GetKeyDown(KeyCode.A))
         {
-            //instantiate a bubble in the correct location
-            int ran = Random.Range(0, 3);
-            GameObject hex = Instantiate(bubbles[ran],cannon.transform.position + cannon.transform.up, Quaternion.identity) as GameObject;
-            //attach the bubble bullet script to the new bubble
-            hex.AddComponent<BubbleBullet>();
-            //add a force to move it in the up vector of the cannon
-            hex.GetComponent<Rigidbody>().AddForce(cannon.transform.up, ForceMode.Impulse);
-            //other ways to maybe move stuff-- keep for now? 
+			nextBubble.GetComponent<Rigidbody>().WakeUp();
+			//add a force to move it in the up vector of the cannon
+			nextBubble.GetComponent<Rigidbody>().AddForce(cannon.transform.up, ForceMode.Impulse);
+            //other ways to maybe move stuff-- keep for now?
             //hex.transform.position = Vector3.MoveTowards(hex.transform.position, cannon.transform.up * 5.0f, 10.0f * Time.deltaTime);
             //Physics.SphereCast(hex.transform.position, 1,cannon.transform.up,);
 
-
+			//schedule this to happen after 1 second
+			Invoke ("SpawnBubble", 1);
         }
-         
+
         //rotate cannon
         if (Input.GetKey(KeyCode.LeftArrow))
         {
             cannon.transform.Rotate(cannon.transform.forward, 20 * Time.deltaTime);
+			// move bubble with the cannon
 
+			nextBubble.transform.position=cannon.transform.position + cannon.transform.up;
         }
 
         //rotate cannon
         if (Input.GetKey(KeyCode.RightArrow))
         {
             cannon.transform.Rotate(-cannon.transform.forward, 20 * Time.deltaTime);
+			// move bubble with the cannon
+			nextBubble.transform.position=cannon.transform.position + cannon.transform.up;
         }
 
         //makes that pink line that goes all the way to the top
@@ -66,4 +71,14 @@ public class Cannon : MonoBehaviour
         lineRenderer.SetPosition(1, transform.up * 20 + transform.position);
     }
 
+	void SpawnBubble()
+	{
+		//instantiate next bubble
+		int ran = Random.Range(0, 3);
+		nextBubble= Instantiate(bubbles[ran],cannon.transform.position + cannon.transform.up, Quaternion.identity) as GameObject;
+		//attach the bubble bullet script to the new bubble
+		nextBubble.AddComponent<BubbleBullet>();
+		nextBubble.GetComponent<Rigidbody>().Sleep();
+		//want rigid body to be asleep so that bubble is attached to cannon till shot
+	}
 }
