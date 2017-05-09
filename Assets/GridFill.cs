@@ -11,7 +11,8 @@ public class GridFill : MonoBehaviour
     public Transform redprefab;
     public Transform blueprefab;
     public Transform yellowprefab;
-    
+    public Transform treatprefab;
+
     public Transform[] bubbles;
 
     public int gridWidth = 11;
@@ -24,17 +25,18 @@ public class GridFill : MonoBehaviour
     public float hexHeight = 1.0f;
     public float gap = 0.0f;
 
-    
+
 
     Vector3 startPos;
 
     void Start()
     {
         //makes an array of bubble gameobejcts to fill out the grid
-        bubbles = new Transform[3];
+        bubbles = new Transform[4];
         bubbles[0]= redprefab;
         bubbles[1]= blueprefab;
         bubbles[2] = yellowprefab;
+        bubbles[3]=treatprefab;
         AddGap();
         CalcStartPos();
         CreateGrid();
@@ -81,9 +83,16 @@ public class GridFill : MonoBehaviour
             for (int x = 0; x < gridWidth; x++)
             {
                 //pics a random bubble game object and instantiates it as a transform (which is a subcategory of GameObject)
-                //I'm trying to change it to game object but something is weird. Will check with Ethan. 
+                //I'm trying to change it to game object but something is weird. Will check with Ethan.
                 int ran = Random.Range(0, 3);
-                Transform hex = Instantiate(bubbles[ran]) as Transform; //why not as gameobject? 
+                int ran_treat=Random.Range(0,9);
+                Transform hex;
+                if(ran_treat==1){
+                  hex=Instantiate(bubbles[3]) as Transform;
+                }
+                else{
+                  hex=Instantiate(bubbles[ran]) as Transform;
+                }
                 Vector2 gridPos = new Vector2(x, y);
                 //find the position of the bubble
                 hex.transform.position = CalcWorldPos(gridPos);

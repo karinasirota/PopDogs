@@ -61,7 +61,7 @@ public class Cannon : MonoBehaviour
 
         //makes that pink line that goes all the way to the top
         LineRenderer lineRenderer = gameObject.GetComponent<LineRenderer>();
-        lineRenderer.numPositions = 2;
+        lineRenderer.positionCount = 2;
         lineRenderer.SetPosition(0, transform.position);
         lineRenderer.SetPosition(1, transform.up * 20 + transform.position);
     }
