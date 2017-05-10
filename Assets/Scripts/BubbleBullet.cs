@@ -39,11 +39,21 @@ public class BubbleBullet : MonoBehaviour
                 //make it a member of the grid 
                 gameObject.transform.parent = collision.gameObject.transform.parent;
                 gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezePositionY;
-                //check neighbors to see if they are the same color. 
-                FloodFillAlgoritm(gameObject);
-
-
-
+                if (collision.gameObject.transform.tag == "treat")
+                {
+                    Collider[] neighbors = Physics.OverlapSphere(collision.gameObject.transform.position, 1.0f);
+                    foreach (Collider neighbor in neighbors)
+                    {
+                        if (neighbor.tag != "wall")
+                            Destroy(neighbor.gameObject);
+                    }
+                }
+                else
+                {
+                    //check neighbors to see if they are the same color. 
+                    FloodFillAlgoritm(gameObject);
+                }
+                
             }
         }
     }

@@ -12,6 +12,9 @@ public class GridFill : MonoBehaviour
     public Transform blueprefab;
     public Transform yellowprefab;
     public Transform treatprefab;
+    public Transform orangeprefab;
+    public Transform greenprefab;
+    public Transform purpleprefab;
 
     public Transform[] bubbles;
 
@@ -35,11 +38,14 @@ public class GridFill : MonoBehaviour
     void Start()
     {
         //makes an array of bubble gameobejcts to fill out the grid
-        bubbles = new Transform[4];
+        bubbles = new Transform[7];
         bubbles[0]= redprefab;
         bubbles[1]= blueprefab;
         bubbles[2] = yellowprefab;
         bubbles[3]=treatprefab;
+        bubbles[4] = orangeprefab;
+        bubbles[5] = greenprefab;
+        bubbles[6] = purpleprefab;
         AddGap();
         CalcStartPos();
         CreateGrid();
@@ -88,7 +94,7 @@ public class GridFill : MonoBehaviour
             {
                 //pics a random bubble game object and instantiates it as a transform (which is a subcategory of GameObject)
                 //I'm trying to change it to game object but something is weird. Will check with Ethan.
-                int ran = Random.Range(0, 3);
+                int ran = Random.Range(0, 7);
                 int ran_treat=Random.Range(0,9);
                 Transform hex;
                 if(ran_treat==1){

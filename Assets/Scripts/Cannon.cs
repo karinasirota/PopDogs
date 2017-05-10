@@ -9,6 +9,9 @@ public class Cannon : MonoBehaviour
     public GameObject redprefab;
     public GameObject blueprefab;
     public GameObject yellowprefab;
+    public GameObject orangeprefab;
+    public GameObject greenprefab;
+    public GameObject purpleprefab;
     public GameObject cannon;
 
     public GameObject[] bubbles;
@@ -21,12 +24,15 @@ public class Cannon : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        bubbles = new GameObject[3];
+        bubbles = new GameObject[6];
         bubbles[0] = redprefab;
         bubbles[1] = blueprefab;
         bubbles[2] = yellowprefab;
-		//instantiate a bubble in the correct location
-		SpawnBubble ();
+        bubbles[3] = orangeprefab;
+        bubbles[4] = greenprefab;
+        bubbles[5] = purpleprefab;
+        //instantiate a bubble in the correct location
+        SpawnBubble ();
     }
 
 
@@ -43,8 +49,8 @@ public class Cannon : MonoBehaviour
             //hex.transform.position = Vector3.MoveTowards(hex.transform.position, cannon.transform.up * 5.0f, 10.0f * Time.deltaTime);
             //Physics.SphereCast(hex.transform.position, 1,cannon.transform.up,);
 
-			//schedule this to happen after 1 second
-			Invoke ("SpawnBubble", 1);
+			//schedule this to happen after 2 seconds
+			Invoke ("SpawnBubble", 2);
         }
 
         //rotate cannon
@@ -74,7 +80,7 @@ public class Cannon : MonoBehaviour
 	void SpawnBubble()
 	{
 		//instantiate next bubble
-		int ran = Random.Range(0, 3);
+		int ran = Random.Range(0, 6);
 		nextBubble= Instantiate(bubbles[ran],cannon.transform.position + cannon.transform.up, Quaternion.identity) as GameObject;
 		//attach the bubble bullet script to the new bubble
 		nextBubble.AddComponent<BubbleBullet>();
