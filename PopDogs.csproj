@@ -75,10 +75,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\AllBubbleAttributes.cs" />
-    <Compile Include="Assets\BubbleBullet.cs" />
-    <Compile Include="Assets\Cannon.cs" />
-    <Compile Include="Assets\GridFill.cs" />
+    <Compile Include="Assets\Scripts\AllBubbleAttributes.cs" />
+    <Compile Include="Assets\Scripts\BubbleBullet.cs" />
+    <Compile Include="Assets\Scripts\Cannon.cs" />
+    <Compile Include="Assets\Scripts\GridFill.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
