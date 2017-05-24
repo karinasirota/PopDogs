@@ -101,6 +101,9 @@ public class GridFill : MonoBehaviour
                   hex=Instantiate(bubbles[3]) as Transform;
                 }
                 else{
+				  if (ran == 3) {
+					ran = 5;
+				  }
                   hex=Instantiate(bubbles[ran]) as Transform;
                 }
                 Vector2 gridPos = new Vector2(x, y);
