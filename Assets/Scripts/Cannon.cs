@@ -50,7 +50,7 @@ public class Cannon : MonoBehaviour
             //Physics.SphereCast(hex.transform.position, 1,cannon.transform.up,);
 
 			//schedule this to happen after 2 seconds
-			Invoke ("SpawnBubble", 2);
+			Invoke ("SpawnBubble", 1f);
         }
 
         //rotate cannon
@@ -58,7 +58,7 @@ public class Cannon : MonoBehaviour
         {
             cannon.transform.Rotate(cannon.transform.forward, 20 * Time.deltaTime);
 			// move bubble with the cannon
-
+            
 			nextBubble.transform.position=cannon.transform.position + cannon.transform.up;
         }
 
