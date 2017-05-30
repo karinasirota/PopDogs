@@ -20,6 +20,8 @@ public class Cannon : MonoBehaviour
 	public GameObject nextBubble;
 
     public GridFill gf;
+	bool canShoot;
+	int count;
 
     // Use this for initialization
     void Start()
@@ -32,6 +34,8 @@ public class Cannon : MonoBehaviour
         bubbles[4] = greenprefab;
         bubbles[5] = purpleprefab;
         //instantiate a bubble in the correct location
+		count=0;
+		canShoot = false;
         SpawnBubble ();
     }
 
@@ -40,7 +44,7 @@ public class Cannon : MonoBehaviour
     void Update()
     {
         //fire bubble when a is pressed
-        if (Input.GetKeyDown(KeyCode.A))
+		if (Input.GetKeyDown(KeyCode.A) && canShoot)
         {
 			nextBubble.GetComponent<Rigidbody>().WakeUp();
 			//add a force to move it in the up vector of the cannon
@@ -49,14 +53,24 @@ public class Cannon : MonoBehaviour
             //hex.transform.position = Vector3.MoveTowards(hex.transform.position, cannon.transform.up * 5.0f, 10.0f * Time.deltaTime);
             //Physics.SphereCast(hex.transform.position, 1,cannon.transform.up,);
             nextBubble.GetComponent<AudioSource>().Play();
-            
 
+			count++;//1 more bubble shot
+			if (count % 3 == 0) {    //every 3 bubbles
+				GameObject wall = GameObject.FindWithTag ("wall");
+				wall.transform.Translate (0, -0.5f, 0);
+				GameObject grid = GameObject.FindWithTag ("grid");
+				foreach (Transform child in grid.transform) {
+					child.transform.Translate (0, -0.5f, 0);
+				}
+			}
+
+			canShoot = false;
             //schedule this to happen after 2 seconds
             Invoke ("SpawnBubble", 1f);
         }
 
         //rotate cannon
-        if (Input.GetKey(KeyCode.LeftArrow))
+		if (Input.GetKey(KeyCode.LeftArrow) && canShoot)
         {
             cannon.transform.Rotate(cannon.transform.forward, 20 * Time.deltaTime);
 			// move bubble with the cannon
@@ -65,7 +79,7 @@ public class Cannon : MonoBehaviour
         }
 
         //rotate cannon
-        if (Input.GetKey(KeyCode.RightArrow))
+		if (Input.GetKey(KeyCode.RightArrow) && canShoot)
         {
             cannon.transform.Rotate(-cannon.transform.forward, 20 * Time.deltaTime);
 			// move bubble with the cannon
@@ -87,6 +101,7 @@ public class Cannon : MonoBehaviour
 		//attach the bubble bullet script to the new bubble
 		nextBubble.AddComponent<BubbleBullet>();
 		nextBubble.GetComponent<Rigidbody>().Sleep();
+		canShoot = true;
 		//want rigid body to be asleep so that bubble is attached to cannon till shot
 	}
 }
