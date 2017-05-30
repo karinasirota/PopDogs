@@ -14,7 +14,9 @@ public class AllBubbleAttributes : MonoBehaviour
         //just here for the floodfill algorithm for DFS to stop infinite recursion
         visited = false;
         connected = false;
-}
+        AudioSource audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.clip = Resources.Load("Dogs Bark #5") as AudioClip;
+    }
 	
 	// Update is called once per frame
 	void Update () {

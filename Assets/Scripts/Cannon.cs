@@ -48,9 +48,11 @@ public class Cannon : MonoBehaviour
             //other ways to maybe move stuff-- keep for now?
             //hex.transform.position = Vector3.MoveTowards(hex.transform.position, cannon.transform.up * 5.0f, 10.0f * Time.deltaTime);
             //Physics.SphereCast(hex.transform.position, 1,cannon.transform.up,);
+            nextBubble.GetComponent<AudioSource>().Play();
+            
 
-			//schedule this to happen after 2 seconds
-			Invoke ("SpawnBubble", 1f);
+            //schedule this to happen after 2 seconds
+            Invoke ("SpawnBubble", 1f);
         }
 
         //rotate cannon

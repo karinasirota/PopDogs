@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BubbleBullet : MonoBehaviour
 {
     public Material gray;
+    int counter;
 
     /*Runs Flood Fill algoritm to determine if bubbles pop */
 
@@ -17,15 +19,30 @@ public class BubbleBullet : MonoBehaviour
 
     void Update()
     {
-
+        //check if endgame
+        endGame();
     }
 
     //when bullet collides with something
     void OnCollisionEnter(Collision collision)
     {
+        // //check collision with wall
+        if (collision.gameObject.tag == "wall")
+        {
+            //stop the ball
+            gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            gameObject.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+            gameObject.GetComponent<Rigidbody>().Sleep();
+            gameObject.GetComponent<Rigidbody>().freezeRotation = true;
+            
+            // make it member of grid
+            gameObject.transform.parent = GameObject.FindWithTag("grid").transform;
+        }
         //if the parent isn't null, which is pretty much everything. This just stops the annouying error
         if (collision.gameObject.transform.parent != null)
         {
+            
+
             //if the bubble collided with an object on the grid
             //this is comparing the parent tag
             if (collision.gameObject.transform.parent.tag == "grid")
@@ -36,6 +53,8 @@ public class BubbleBullet : MonoBehaviour
                 gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
                 gameObject.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
                 gameObject.GetComponent<Rigidbody>().Sleep();
+                gameObject.GetComponent<Rigidbody>().freezeRotation = true;
+                collision.gameObject.GetComponent<Rigidbody>().freezeRotation = true;
                 //make it a member of the grid 
                 gameObject.transform.parent = collision.gameObject.transform.parent;
                 gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezePositionY;
@@ -53,8 +72,15 @@ public class BubbleBullet : MonoBehaviour
                     //check neighbors to see if they are the same color. 
                     FloodFillAlgoritm(gameObject);
                 }
+                //update the score
+                if (counter != 1)
+                {
+                    updateScore();
+                }
                 
+
             }
+            
         }
     }
 
@@ -69,7 +95,7 @@ public class BubbleBullet : MonoBehaviour
         Collider[] neighbors = Physics.OverlapSphere(bubble.transform.position, 1.0f);
         //constuct list to put same game objects in 
         List<Collider> sameColors = new List<Collider>();
-        int counter = 0;
+        counter = 0;
         //say that you visited this node. 
         bubble.GetComponent<AllBubbleAttributes>().visited = true;
         //for each node that the bullet is touching
@@ -78,11 +104,11 @@ public class BubbleBullet : MonoBehaviour
             //if the colors are the same via tag comparison
             if (bubble.tag == x.tag)
             {
-                //increase teh counter
-                counter++;
                 //if it's not already in the list of the same color touching bubbles
                 if (!sameColors.Contains(x))
                 {
+                    //increase teh counter
+                    counter++;
                     //add it to that list
                     sameColors.Add(x);
                     //then do the same for all its unvisited neighbors, recursively. 
@@ -97,9 +123,13 @@ public class BubbleBullet : MonoBehaviour
         //if there counter is more than one, since sameColors includes the bubble you shot 
         foreach (Collider y in sameColors)
         {
+
             if (counter != 1)
+            {
                 Destroy(y.gameObject);
+            }
         }
+        
 
     }
 
@@ -107,6 +137,7 @@ public class BubbleBullet : MonoBehaviour
     {
         findSingleBubbles();
         popSingleBubbles();
+        
     }
 
     void findSingleBubbles()
@@ -116,6 +147,7 @@ public class BubbleBullet : MonoBehaviour
         
 
         //double check this
+
         foreach (Transform child in grid.transform)
         {
             
@@ -166,6 +198,23 @@ public class BubbleBullet : MonoBehaviour
             if (!child.gameObject.GetComponent<AllBubbleAttributes>().connected)
                 Destroy(child.gameObject);
 
+        }
+    }
+
+    void updateScore()
+    {
+        GameObject score = GameObject.FindWithTag("score");
+        score.GetComponent<Scoring>().score += counter;
+        
+    }
+
+    void endGame()
+    {
+        GameObject grid = GameObject.FindWithTag("grid");
+        Debug.Log(grid.transform.childCount);
+        if(grid.transform.childCount == 0)
+        {
+            SceneManager.LoadScene(2);
         }
     }
 

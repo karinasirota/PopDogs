@@ -78,7 +78,11 @@
     <Compile Include="Assets\Scripts\AllBubbleAttributes.cs" />
     <Compile Include="Assets\Scripts\BubbleBullet.cs" />
     <Compile Include="Assets\Scripts\Cannon.cs" />
+    <Compile Include="Assets\Scripts\ClosingScene.cs" />
     <Compile Include="Assets\Scripts\GridFill.cs" />
+    <Compile Include="Assets\Scripts\OpeningSceneScript.cs" />
+    <Compile Include="Assets\Scripts\Scoring.cs" />
+    <Compile Include="Assets\Scripts\thunder.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
