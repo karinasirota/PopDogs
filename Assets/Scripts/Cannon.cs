@@ -74,7 +74,7 @@ public class Cannon : MonoBehaviour
         {
             cannon.transform.Rotate(cannon.transform.forward, 20 * Time.deltaTime);
 			// move bubble with the cannon
-            
+
 			nextBubble.transform.position=cannon.transform.position + cannon.transform.up;
         }
 
@@ -88,7 +88,7 @@ public class Cannon : MonoBehaviour
 
         //makes that pink line that goes all the way to the top
         LineRenderer lineRenderer = gameObject.GetComponent<LineRenderer>();
-        lineRenderer.numPositions = 2;
+        lineRenderer.positionCount = 2;
         lineRenderer.SetPosition(0, transform.position);
         lineRenderer.SetPosition(1, transform.up * 20 + transform.position);
     }
