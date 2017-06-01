@@ -24,8 +24,8 @@ public class BottomBar : MonoBehaviour {
             {
                 if (neighbor.tag == "bottom")
                 {
-
-                    SceneManager.LoadScene(2);
+//					child.gameObject.GetComponent<Rigidbody> ().useGravity = true;
+					SceneManager.LoadScene(2);
                 }
 
             }
@@ -33,4 +33,6 @@ public class BottomBar : MonoBehaviour {
 
         }
     }
+
+
 }

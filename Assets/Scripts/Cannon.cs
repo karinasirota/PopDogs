@@ -11,7 +11,7 @@ public class Cannon : MonoBehaviour
     public GameObject yellowprefab;
     public GameObject orangeprefab;
     public GameObject greenprefab;
-    public GameObject purpleprefab;
+//    public GameObject purpleprefab;
     public GameObject cannon;
 
     public GameObject[] bubbles;
@@ -26,13 +26,13 @@ public class Cannon : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        bubbles = new GameObject[6];
+        bubbles = new GameObject[5];
         bubbles[0] = redprefab;
         bubbles[1] = blueprefab;
         bubbles[2] = yellowprefab;
         bubbles[3] = orangeprefab;
         bubbles[4] = greenprefab;
-        bubbles[5] = purpleprefab;
+//        bubbles[5] = purpleprefab;
         //instantiate a bubble in the correct location
 		count=0;
 		canShoot = false;
@@ -48,7 +48,7 @@ public class Cannon : MonoBehaviour
         {
 			nextBubble.GetComponent<Rigidbody>().WakeUp();
 			//add a force to move it in the up vector of the cannon
-			nextBubble.GetComponent<Rigidbody>().AddForce(cannon.transform.up*2, ForceMode.Impulse);
+			nextBubble.GetComponent<Rigidbody>().AddForce(cannon.transform.up*3, ForceMode.Impulse);
             //other ways to maybe move stuff-- keep for now?
             //hex.transform.position = Vector3.MoveTowards(hex.transform.position, cannon.transform.up * 5.0f, 10.0f * Time.deltaTime);
             //Physics.SphereCast(hex.transform.position, 1,cannon.transform.up,);
@@ -67,7 +67,7 @@ public class Cannon : MonoBehaviour
         //rotate cannon
 		if (Input.GetKey(KeyCode.LeftArrow) && canShoot)
         {
-            cannon.transform.Rotate(cannon.transform.forward, 30 * Time.deltaTime);
+            cannon.transform.Rotate(cannon.transform.forward, 45 * Time.deltaTime);
 			// move bubble with the cannon
 
 			nextBubble.transform.position=cannon.transform.position + cannon.transform.up;
@@ -76,7 +76,7 @@ public class Cannon : MonoBehaviour
         //rotate cannon
 		if (Input.GetKey(KeyCode.RightArrow) && canShoot)
         {
-            cannon.transform.Rotate(-cannon.transform.forward, 30 * Time.deltaTime);
+            cannon.transform.Rotate(-cannon.transform.forward, 45 * Time.deltaTime);
 			// move bubble with the cannon
 			nextBubble.transform.position=cannon.transform.position + cannon.transform.up;
         }
@@ -91,7 +91,7 @@ public class Cannon : MonoBehaviour
 	void SpawnBubble()
 	{
 		//instantiate next bubble
-		int ran = Random.Range(0, 6);
+		int ran = Random.Range(0, 5);
 		nextBubble= Instantiate(bubbles[ran],cannon.transform.position + cannon.transform.up, Quaternion.identity) as GameObject;
 		//attach the bubble bullet script to the new bubble
 		nextBubble.AddComponent<BubbleBullet>();
@@ -104,6 +104,9 @@ public class Cannon : MonoBehaviour
 	{
 		GameObject wall = GameObject.FindWithTag ("wall");
 		wall.transform.Translate (0, -0.5f, 0);
+//		gameObject.GetComponent<UnityEngine.UI.Image>().position = 
+		GameObject man = GameObject.FindWithTag ("walker");
+		man.GetComponent<RectTransform>().Translate(0, -25f, 0);
 		GameObject grid = GameObject.FindWithTag ("grid");
 		foreach (Transform child in grid.transform) {
 			child.transform.Translate (0, -0.5f, 0);

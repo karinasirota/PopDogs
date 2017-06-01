@@ -26,8 +26,15 @@ public class BubbleBullet : MonoBehaviour
     //when bullet collides with something
     void OnCollisionEnter(Collision collision)
     {
-        gameObject.GetComponent<Rigidbody>().freezeRotation = true;
+		if (collision.gameObject.tag != "cannon")
+		{
+			gameObject.GetComponent<Rigidbody>().freezeRotation = true;
+			collision.gameObject.GetComponent<Rigidbody>().freezeRotation = true;
+			gameObject.GetComponent<Rigidbody> ().isKinematic = true;
+		}
+//        gameObject.GetComponent<Rigidbody>().freezeRotation = true;
         // //check collision with wall
+
         if (collision.gameObject.tag == "wall")
         {
             //stop the ball
@@ -43,6 +50,8 @@ public class BubbleBullet : MonoBehaviour
 		else if (collision.gameObject.tag == "thunder") {
 			GameObject wall = GameObject.FindWithTag ("wall");
 			wall.transform.Translate (0, -0.5f, 0);
+			GameObject man = GameObject.FindWithTag ("walker");
+			man.GetComponent<RectTransform>().Translate(0, -25f, 0);
 			GameObject grid = GameObject.FindWithTag ("grid");
 			foreach (Transform child in grid.transform) {
 				child.transform.Translate (0, -0.5f, 0);
@@ -80,6 +89,8 @@ public class BubbleBullet : MonoBehaviour
                         if (neighbor.tag != "wall")
                             Destroy(neighbor.gameObject);
                     }
+					GameObject score = GameObject.FindWithTag("score");
+					score.GetComponent<Scoring>().score += 5;
                 }
                 else
                 {
@@ -237,9 +248,13 @@ public class BubbleBullet : MonoBehaviour
         //if a child is lower than a certain point
         foreach (Transform child in grid.transform)
         {
-            if (child.position.y < -3)
-                SceneManager.LoadScene(2);
+			if (child.position.y < -3) {
+
+				SceneManager.LoadScene (2);
+			}
         }
+
     }
+
 
 }

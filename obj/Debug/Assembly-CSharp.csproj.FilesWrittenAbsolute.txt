@@ -19,3 +19,25 @@
 /Users/RohaanAdvani68/Documents/Coding/370 Game/PopDogs/Temp/bin/Debug/Assembly-CSharp.dll
 /Users/RohaanAdvani68/Documents/Coding/370 Game/PopDogs/obj/Debug/Assembly-CSharp.dll
 /Users/RohaanAdvani68/Documents/Coding/370 Game/PopDogs/obj/Debug/Assembly-CSharp.dll.mdb
+/Users/ankita/Documents/NU Year 2/PopDogs/Temp/bin/Debug/Assembly-CSharp.dll.mdb
+/Users/ankita/Documents/NU Year 2/PopDogs/Temp/bin/Debug/Assembly-CSharp.dll
+/Users/ankita/Documents/NU Year 2/PopDogs/obj/Debug/Assembly-CSharp.dll
+/Users/ankita/Documents/NU Year 2/PopDogs/obj/Debug/Assembly-CSharp.dll.mdb
+/Users/ankita/Documents/NU Year 2/PopDogs/Temp/bin/Debug/UnityEngine.dll
+/Users/ankita/Documents/NU Year 2/PopDogs/Temp/bin/Debug/UnityEditor.dll
+/Users/ankita/Documents/NU Year 2/PopDogs/Temp/bin/Debug/UnityEngine.Analytics.dll
+/Users/ankita/Documents/NU Year 2/PopDogs/Temp/bin/Debug/UnityEngine.TestRunner.dll
+/Users/ankita/Documents/NU Year 2/PopDogs/Temp/bin/Debug/nunit.framework.dll
+/Users/ankita/Documents/NU Year 2/PopDogs/Temp/bin/Debug/UnityEngine.Networking.dll
+/Users/ankita/Documents/NU Year 2/PopDogs/Temp/bin/Debug/UnityEngine.UI.dll
+/Users/ankita/Documents/NU Year 2/PopDogs/Temp/bin/Debug/UnityEngine.HoloLens.dll
+/Users/ankita/Documents/NU Year 2/PopDogs/Temp/bin/Debug/UnityEngine.VR.dll
+/Users/ankita/Documents/NU Year 2/PopDogs/Temp/bin/Debug/Mono.Cecil.dll
+/Users/ankita/Documents/NU Year 2/PopDogs/Temp/bin/Debug/Unity.SerializationLogic.dll
+/Users/ankita/Documents/NU Year 2/PopDogs/Temp/bin/Debug/Unity.DataContract.dll
+/Users/ankita/Documents/NU Year 2/PopDogs/Temp/bin/Debug/ICSharpCode.NRefactory.dll
+/Users/ankita/Documents/NU Year 2/PopDogs/Temp/bin/Debug/Unity.UNetWeaver.dll
+/Users/ankita/Documents/NU Year 2/PopDogs/Temp/bin/Debug/Unity.UNetWeaver.dll.mdb
+/Users/ankita/Documents/NU Year 2/PopDogs/Temp/bin/Debug/Unity.CecilTools.dll
+/Users/ankita/Documents/NU Year 2/PopDogs/Temp/bin/Debug/Mono.Cecil.Pdb.dll
+/Users/ankita/Documents/NU Year 2/PopDogs/Temp/bin/Debug/Mono.Cecil.Mdb.dll
