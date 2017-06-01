@@ -8,11 +8,11 @@ public class Scoring : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         score = 0;
-        gameObject.GetComponent<UnityEngine.UI.Text>().text = score.ToString();
+        gameObject.GetComponent<UnityEngine.UI.Text>().text = "Score:" + score.ToString();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        gameObject.GetComponent<UnityEngine.UI.Text>().text = score.ToString();
+        gameObject.GetComponent<UnityEngine.UI.Text>().text = "Score:" + score.ToString();
     }
 }

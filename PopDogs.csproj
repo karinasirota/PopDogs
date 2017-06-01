@@ -76,6 +76,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\AllBubbleAttributes.cs" />
+    <Compile Include="Assets\Scripts\BottomBar.cs" />
     <Compile Include="Assets\Scripts\BubbleBullet.cs" />
     <Compile Include="Assets\Scripts\Cannon.cs" />
     <Compile Include="Assets\Scripts\ClosingScene.cs" />

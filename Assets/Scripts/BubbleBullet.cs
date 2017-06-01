@@ -26,6 +26,7 @@ public class BubbleBullet : MonoBehaviour
     //when bullet collides with something
     void OnCollisionEnter(Collision collision)
     {
+        gameObject.GetComponent<Rigidbody>().freezeRotation = true;
         // //check collision with wall
         if (collision.gameObject.tag == "wall")
         {
@@ -46,6 +47,9 @@ public class BubbleBullet : MonoBehaviour
 			foreach (Transform child in grid.transform) {
 				child.transform.Translate (0, -0.5f, 0);
 			}
+
+            Destroy(collision.gameObject);
+            Destroy(gameObject);
 		}
 
         //if the parent isn't null, which is pretty much everything. This just stops the annoying error
@@ -220,11 +224,21 @@ public class BubbleBullet : MonoBehaviour
 
     void endGame()
     {
+        //if there is nothing on board
         GameObject grid = GameObject.FindWithTag("grid");
-        Debug.Log(grid.transform.childCount);
-        if(grid.transform.childCount == 0)
+        GameObject score = GameObject.FindWithTag("score");
+
+        PlayerPrefs.SetInt("Player Score", score.GetComponent<Scoring>().score);
+        if (grid.transform.childCount == 0)
         {
             SceneManager.LoadScene(2);
+        }
+  
+        //if a child is lower than a certain point
+        foreach (Transform child in grid.transform)
+        {
+            if (child.position.y < -3)
+                SceneManager.LoadScene(2);
         }
     }
 

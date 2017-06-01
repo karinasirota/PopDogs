@@ -5,10 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class ClosingScene : MonoBehaviour {
 
+    public int score;
+    public string finalwords;
 	// Use this for initialization
 	void Start () {
-		
-	}
+        score = PlayerPrefs.GetInt("Player Score");
+        finalwords = "Your Score is: ";
+        gameObject.GetComponent<UnityEngine.UI.Text>().text = finalwords + score.ToString();
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -16,5 +20,6 @@ public class ClosingScene : MonoBehaviour {
         {
             SceneManager.LoadScene(1);
         }
+        gameObject.GetComponent<UnityEngine.UI.Text>().text = finalwords + score.ToString();
     }
 }

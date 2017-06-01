@@ -16,10 +16,15 @@ public class AllBubbleAttributes : MonoBehaviour
         connected = false;
         AudioSource audioSource = gameObject.AddComponent<AudioSource>();
         audioSource.clip = Resources.Load("Dogs Bark #5") as AudioClip;
+        gameObject.GetComponent<Rigidbody>().freezeRotation = true;
     }
 	
 	// Update is called once per frame
 	void Update () {
 		
 	}
+    void OnBecameInvisible()
+    {
+        Destroy(gameObject);
+    }
 }
