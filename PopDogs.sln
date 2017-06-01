@@ -1,7 +1,7 @@
-﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PopDogs", "Assembly-CSharp.csproj", "{98037405-D729-E471-13E3-903BA8024E27}"
+# Visual Studio 2008
+
+Project("{BB75B393-68FF-30BA-C43D-4DA1038B753F}") = "PopDogs", "Assembly-CSharp.csproj", "{98037405-D729-E471-13E3-903BA8024E27}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

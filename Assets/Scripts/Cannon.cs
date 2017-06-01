@@ -48,31 +48,26 @@ public class Cannon : MonoBehaviour
         {
 			nextBubble.GetComponent<Rigidbody>().WakeUp();
 			//add a force to move it in the up vector of the cannon
-			nextBubble.GetComponent<Rigidbody>().AddForce(cannon.transform.up, ForceMode.Impulse);
+			nextBubble.GetComponent<Rigidbody>().AddForce(cannon.transform.up*2, ForceMode.Impulse);
             //other ways to maybe move stuff-- keep for now?
             //hex.transform.position = Vector3.MoveTowards(hex.transform.position, cannon.transform.up * 5.0f, 10.0f * Time.deltaTime);
             //Physics.SphereCast(hex.transform.position, 1,cannon.transform.up,);
             nextBubble.GetComponent<AudioSource>().Play();
 
 			count++;//1 more bubble shot
-			if (count % 3 == 0) {    //every 3 bubbles
-				GameObject wall = GameObject.FindWithTag ("wall");
-				wall.transform.Translate (0, -0.5f, 0);
-				GameObject grid = GameObject.FindWithTag ("grid");
-				foreach (Transform child in grid.transform) {
-					child.transform.Translate (0, -0.5f, 0);
-				}
+			if (count % 5 == 0) {    //every 3 bubbles
+				Invoke("LowerWall",2f);
 			}
 
 			canShoot = false;
-            //schedule this to happen after 2 seconds
+            //schedule this to happen after 1 second
             Invoke ("SpawnBubble", 1f);
         }
 
         //rotate cannon
 		if (Input.GetKey(KeyCode.LeftArrow) && canShoot)
         {
-            cannon.transform.Rotate(cannon.transform.forward, 20 * Time.deltaTime);
+            cannon.transform.Rotate(cannon.transform.forward, 30 * Time.deltaTime);
 			// move bubble with the cannon
 
 			nextBubble.transform.position=cannon.transform.position + cannon.transform.up;
@@ -81,16 +76,16 @@ public class Cannon : MonoBehaviour
         //rotate cannon
 		if (Input.GetKey(KeyCode.RightArrow) && canShoot)
         {
-            cannon.transform.Rotate(-cannon.transform.forward, 20 * Time.deltaTime);
+            cannon.transform.Rotate(-cannon.transform.forward, 30 * Time.deltaTime);
 			// move bubble with the cannon
 			nextBubble.transform.position=cannon.transform.position + cannon.transform.up;
         }
 
         //makes that pink line that goes all the way to the top
-        LineRenderer lineRenderer = gameObject.GetComponent<LineRenderer>();
-        lineRenderer.positionCount = 2;
-        lineRenderer.SetPosition(0, transform.position);
-        lineRenderer.SetPosition(1, transform.up * 20 + transform.position);
+      //  LineRenderer lineRenderer = gameObject.GetComponent<LineRenderer>();
+        //lineRenderer.positionCount = 2;
+        //lineRenderer.SetPosition(0, transform.position);
+        //lineRenderer.SetPosition(1, transform.up * 20 + transform.position);
     }
 
 	void SpawnBubble()
@@ -103,5 +98,15 @@ public class Cannon : MonoBehaviour
 		nextBubble.GetComponent<Rigidbody>().Sleep();
 		canShoot = true;
 		//want rigid body to be asleep so that bubble is attached to cannon till shot
+	}
+
+	void LowerWall()
+	{
+		GameObject wall = GameObject.FindWithTag ("wall");
+		wall.transform.Translate (0, -0.5f, 0);
+		GameObject grid = GameObject.FindWithTag ("grid");
+		foreach (Transform child in grid.transform) {
+			child.transform.Translate (0, -0.5f, 0);
+		}
 	}
 }

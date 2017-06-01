@@ -38,7 +38,17 @@ public class BubbleBullet : MonoBehaviour
             // make it member of grid
             gameObject.transform.parent = GameObject.FindWithTag("grid").transform;
         }
-        //if the parent isn't null, which is pretty much everything. This just stops the annouying error
+
+		else if (collision.gameObject.tag == "thunder") {
+			GameObject wall = GameObject.FindWithTag ("wall");
+			wall.transform.Translate (0, -0.5f, 0);
+			GameObject grid = GameObject.FindWithTag ("grid");
+			foreach (Transform child in grid.transform) {
+				child.transform.Translate (0, -0.5f, 0);
+			}
+		}
+
+        //if the parent isn't null, which is pretty much everything. This just stops the annoying error
         if (collision.gameObject.transform.parent != null)
         {
             
