@@ -44,7 +44,7 @@ public class Cannon : MonoBehaviour
     void Update()
     {
         //fire bubble when a is pressed
-		if (Input.GetKeyDown(KeyCode.A) && canShoot)
+		if (Input.GetKeyDown(KeyCode.Space) && canShoot)
         {
 			nextBubble.GetComponent<Rigidbody>().WakeUp();
 			//add a force to move it in the up vector of the cannon
