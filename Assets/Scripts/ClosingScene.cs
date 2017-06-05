@@ -42,6 +42,7 @@ public class ClosingScene : MonoBehaviour {
         score = PlayerPrefs.GetInt("Player Score");
         finalwords = "Your Score is: ";
         gameObject.GetComponent<UnityEngine.UI.Text>().text = finalwords + score.ToString();
+        Debug.Log(finalwords + score.ToString());
     }
 
 //	Vector3 CalcWorldPos(Vector2 gridPos)

@@ -7,7 +7,9 @@ public class GridFill : MonoBehaviour
 
     /*creates bubble grid */
 
-        //found a website; will cite once I refind the link
+    //found a tutorial to guide through this process
+    //https://www.youtube.com/watch?v=konL0iB5gPI
+    //Our code is modified from theirs
     public Transform redprefab;
     public Transform blueprefab;
     public Transform yellowprefab;
@@ -51,6 +53,8 @@ public class GridFill : MonoBehaviour
         AddGap();
         CalcStartPos();
         CreateGrid();
+
+        
     }
 
     //adds the gap between bubbles

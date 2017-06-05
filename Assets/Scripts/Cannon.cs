@@ -52,7 +52,7 @@ public class Cannon : MonoBehaviour
             //other ways to maybe move stuff-- keep for now?
             //hex.transform.position = Vector3.MoveTowards(hex.transform.position, cannon.transform.up * 5.0f, 10.0f * Time.deltaTime);
             //Physics.SphereCast(hex.transform.position, 1,cannon.transform.up,);
-            nextBubble.GetComponent<AudioSource>().Play();
+            
 
 			count++;//1 more bubble shot
 			if (count % 5 == 0) {    //every 3 bubbles
@@ -67,18 +67,25 @@ public class Cannon : MonoBehaviour
         //rotate cannon
 		if (Input.GetKey(KeyCode.LeftArrow) && canShoot)
         {
-            cannon.transform.Rotate(cannon.transform.forward, 45 * Time.deltaTime);
-			// move bubble with the cannon
-
-			nextBubble.transform.position=cannon.transform.position + cannon.transform.up;
+            if (cannon.transform.rotation.z < 0.8)
+            {
+                cannon.transform.Rotate(cannon.transform.forward, 45 * Time.deltaTime);
+                // move bubble with the cannon
+                
+                nextBubble.transform.position = cannon.transform.position + cannon.transform.up;
+            }
         }
 
         //rotate cannon
 		if (Input.GetKey(KeyCode.RightArrow) && canShoot)
         {
-            cannon.transform.Rotate(-cannon.transform.forward, 45 * Time.deltaTime);
-			// move bubble with the cannon
-			nextBubble.transform.position=cannon.transform.position + cannon.transform.up;
+            if (cannon.transform.rotation.z > -0.8)
+            {
+                cannon.transform.Rotate(-cannon.transform.forward, 45 * Time.deltaTime);
+                
+                // move bubble with the cannon
+                nextBubble.transform.position = cannon.transform.position + cannon.transform.up;
+            }
         }
 
         //makes that pink line that goes all the way to the top
@@ -104,9 +111,8 @@ public class Cannon : MonoBehaviour
 	{
 		GameObject wall = GameObject.FindWithTag ("wall");
 		wall.transform.Translate (0, -0.5f, 0);
-//		gameObject.GetComponent<UnityEngine.UI.Image>().position = 
 		GameObject man = GameObject.FindWithTag ("walker");
-		man.GetComponent<RectTransform>().Translate(0, -25f, 0);
+		man.transform.Translate(0, -0.5f, 0);
 		GameObject grid = GameObject.FindWithTag ("grid");
 		foreach (Transform child in grid.transform) {
 			child.transform.Translate (0, -0.5f, 0);

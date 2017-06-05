@@ -5,7 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class BubbleBullet : MonoBehaviour
 {
-    public Material gray;
+    AudioSource audio;
+    AudioClip clip;
     int counter;
 
     /*Runs Flood Fill algoritm to determine if bubbles pop */
@@ -14,7 +15,9 @@ public class BubbleBullet : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-       
+        GameObject audioSource = GameObject.FindWithTag("audio");
+        audio = audioSource.GetComponent<AudioSource>();
+        
     }
 
     void Update()
@@ -51,7 +54,7 @@ public class BubbleBullet : MonoBehaviour
 			GameObject wall = GameObject.FindWithTag ("wall");
 			wall.transform.Translate (0, -0.5f, 0);
 			GameObject man = GameObject.FindWithTag ("walker");
-			man.GetComponent<RectTransform>().Translate(0, -25f, 0);
+			man.transform.Translate(0, -0.5f, 0);
 			GameObject grid = GameObject.FindWithTag ("grid");
 			foreach (Transform child in grid.transform) {
 				child.transform.Translate (0, -0.5f, 0);
@@ -81,6 +84,8 @@ public class BubbleBullet : MonoBehaviour
                 //make it a member of the grid 
                 gameObject.transform.parent = collision.gameObject.transform.parent;
                 gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezePositionY;
+                //make bark sound
+                audio.Play();
                 if (collision.gameObject.transform.tag == "treat")
                 {
                     Collider[] neighbors = Physics.OverlapSphere(collision.gameObject.transform.position, 1.0f);
